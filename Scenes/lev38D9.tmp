@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=3 uid="uid://mercabc34n88"]
+
+[ext_resource type="Texture2D" uid="uid://b3ow0iigeveeu" path="res://kenney_space-shooter-redux/Bonus/Backgrounds/blue.png" id="1_0y5r7"]
+[ext_resource type="Script" path="res://Scenes/level.gd" id="1_qkmn5"]
+[ext_resource type="Texture2D" uid="uid://d2nls2vgkjrw1" path="res://kenney_space-shooter-redux/Images/Effects/star1.png" id="3_etdsa"]
+[ext_resource type="PackedScene" uid="uid://b84coa4ban4m5" path="res://Scenes/player.tscn" id="3_p0p08"]
+[ext_resource type="Texture2D" uid="uid://d17pkropreybi" path="res://kenney_space-shooter-redux/Images/Effects/star2.png" id="4_a3l0b"]
+[ext_resource type="Texture2D" uid="uid://bhcjfil8gn0pl" path="res://kenney_space-shooter-redux/Images/Effects/star3.png" id="5_67xe0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fmauu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_etdsa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a3l0b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_67xe0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s7b33"]
+size = Vector2(100, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvs2d"]
+size = Vector2(1280, 100)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_qkmn5")
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(635, 369)
+scale = Vector2(5.13672, 2.97641)
+texture = ExtResource("1_0y5r7")
+
+[node name="Stars" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(156, 127)
+sprite_frames = SubResource("SpriteFrames_fmauu")
+frame_progress = 0.329805
+
+[node name="Player" parent="." instance=ExtResource("3_p0p08")]
+position = Vector2(625, 377)
+
+[node name="Borders" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Borders"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D"]
+position = Vector2(1330, 360)
+shape = SubResource("RectangleShape2D_s7b33")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Borders"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D2"]
+position = Vector2(-50, 360)
+shape = SubResource("RectangleShape2D_s7b33")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Borders"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D3"]
+position = Vector2(640, -50)
+shape = SubResource("RectangleShape2D_kvs2d")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Borders"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D4"]
+position = Vector2(640, 770)
+shape = SubResource("RectangleShape2D_kvs2d")
+
+[node name="MeteorTimer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="Meteors" type="Node2D" parent="."]
+
+[node name="Lasers" type="Node2D" parent="."]
+
+[connection signal="laser" from="Player" to="." method="_on_player_laser"]
+[connection signal="timeout" from="MeteorTimer" to="." method="_on_meteor_timer_timeout"]

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://mercabc34n88"]
+
+[ext_resource type="Texture2D" uid="uid://dlm3iduwrt241" path="res://First_Game_Assets/Sexy Zach.PNG" id="1_4b8mm"]
+[ext_resource type="PackedScene" uid="uid://cu4mdb1646fv5" path="res://Scenes/meteor_scene.tscn" id="2_i1a62"]
+[ext_resource type="PackedScene" uid="uid://b84coa4ban4m5" path="res://Scenes/player.tscn" id="3_p0p08"]
+
+[node name="Level" type="Node2D"]
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(640.143, 354.88)
+scale = Vector2(1.28242, 0.600032)
+texture = ExtResource("1_4b8mm")
+
+[node name="MeteorScene" parent="." instance=ExtResource("2_i1a62")]
+position = Vector2(371, 290)
+
+[node name="Player" parent="." instance=ExtResource("3_p0p08")]
+position = Vector2(0, 0)

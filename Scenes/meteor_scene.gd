@@ -38,3 +38,5 @@ func _on_area_entered(area):
 	print("whatf")
 	area.queue_free()
 	queue_free()
+	
+#Edited this for git test
